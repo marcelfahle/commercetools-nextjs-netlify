@@ -87,7 +87,8 @@ export async function getStaticProps({ params }: { params: any }) {
       products: payload.data.dataSources.__master?.items || [],
       product: payload.data.dataSources.__master?.product || []
     },
-    revalidate: 3600
+    fallback: 'blocking',
+    revalidate: 60
   }
 }
 
