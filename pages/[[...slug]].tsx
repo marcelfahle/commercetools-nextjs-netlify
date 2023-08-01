@@ -78,10 +78,6 @@ export async function getStaticProps({ params }: { params: any }) {
     }
   });
   const payload = await res.json();
-  console.log(url)
-  console.log(payload)
-
-  //$.page.sections.head.layoutElements[0].tastics[0].configuration.navigationCategories
 
   return {
     props: {
@@ -91,7 +87,7 @@ export async function getStaticProps({ params }: { params: any }) {
       product: payload.data.dataSources.__master?.product || [],
       now: new Date().toLocaleString(),
     },
-    revalidate: 60,
+    revalidate: 120,
   }
 }
 
