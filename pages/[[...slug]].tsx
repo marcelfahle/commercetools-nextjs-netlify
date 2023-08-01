@@ -19,16 +19,19 @@ type Props = {
   title: string;
   menu?: MenuItem[];
   products?: Product[];
-  product?: Product
+  product?: Product,
+  now: string
+
 }
 
-export default function Home({ title, menu, products, product }: Props) {
+export default function Home({ title, menu, products, product, now }: Props) {
   console.log(products)
   console.log(product)
   return (
     <main
       className={`flex min-h-screen flex-col items-center p-24 ${inter.className}`}
     >
+      <h1 className='font-bold text-xl'>Now: {now}</h1>
       <nav className='ring-1 p-4 mb-12'>
         <ul className='flex flex-row gap-x-4'>
           <li><Link href="/">Home</Link></li>
@@ -85,10 +88,10 @@ export async function getStaticProps({ params }: { params: any }) {
       title: payload.pageFolder.name,
       menu: payload.page.sections.head.layoutElements[0].tastics[0].configuration.navigationCategories,
       products: payload.data.dataSources.__master?.items || [],
-      product: payload.data.dataSources.__master?.product || []
+      product: payload.data.dataSources.__master?.product || [],
+      now: new Date().toLocaleString(),
     },
-    fallback: 'blocking',
-    revalidate: 60
+    revalidate: 60,
   }
 }
 
